@@ -42,6 +42,8 @@ const Transaction = () => {
                         type={item.type} 
                         status={item.status}
                         metadata={item.metadata}
+                        amount={item.amount}
+                        date={item.date}
                     />
                 ))
        
@@ -53,8 +55,9 @@ const Transaction = () => {
 }
 
 interface tranx {
-    type: string,
-    status: string,
+    amount: number;
+    type: string;
+    status: string;
     metadata:{
         name: string;
         type: string;
@@ -63,9 +66,11 @@ interface tranx {
         country: string;
         product_name: string;
     };
+    date: string;
+
 }
 
-const Trnx = ({ type, status,metadata }:tranx)=> {
+const Trnx = ({ type, status,metadata,amount,date }:tranx)=> {
 
     const typecolor= `
         ${type == 'deposit' && 'bg-[#E3FCF2] text-[#075132]'}
@@ -80,13 +85,13 @@ const Trnx = ({ type, status,metadata }:tranx)=> {
                     {  type == 'withdrawal' && <MoveUpRight />}
                 </span>
                 <div className="flex flex-col justify-between gap-1">
-                    <h3 className=" text-base leading-6">{metadata?.product_name} </h3>
-                    <p className=" text-gray-400 text-sm">{metadata?.name}</p>
+                    <h3 className=" text-base leading-6"> { type == 'withdrawal' ? 'Cash withdrawal': metadata?.product_name} </h3>
+                    <p className={` text-gray-400 text-sm ${ type == 'withdrawal' ? status === 'successful'  ? ' text-green-500':'text-yellow-500': '' }`}>{type == 'withdrawal' ? status : metadata?.name}</p>
                 </div>
             </div>
             <div className=" text-right flex flex-col justify-between gap-1">
-                <h3 className=" font-bold text-base">USD 600</h3>
-                <p className=" text-xs font-medium text-gray-400">Apr 03,2022</p>
+                <h3 className=" font-bold text-base">USD {amount}</h3>
+                <p className=" text-xs font-medium text-gray-400">{date}</p>
             </div>
         </div>
     )

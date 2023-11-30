@@ -10,7 +10,7 @@ function App() {
 
 
   return (
-      <div className=" pt-[64px] w-[1160px] mx-auto">
+      <div className=" py-[64px] pl-[50px] w-[1160px] mx-auto">
         <div className=" flex w-full justify-between mb-[118px]">
             <Graph balance={isLoading ?  '0.00': wallet.balance }/>
             <div className=" w-[271px] flex flex-col gap-[34px] ">
